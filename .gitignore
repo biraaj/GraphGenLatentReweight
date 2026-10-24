@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*/__pycache__/
+
+outputs/
+dataset_cache/
+wandb/
+multirun/
+
+evaluation/synthetic/orca/orca
+evaluation/synthetic/orca/tmp_*.txt
+
+.DS_Store

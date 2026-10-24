@@ -1,0 +1,40 @@
+defaults:
+  - encoder: lpe_mlp_gine_guac
+  - dataset: guacamol
+  - _self_
+
+root: null
+checkpoint: guacamol_ae_vgae_specphi_best
+
+# Training
+seed: 0
+lr_scheduler: 'cosine'
+lr: 2e-4
+min_lr: 1e-4
+lr_decay_iters: 4e4
+weight_decay: 1e-4
+gradient_norm: 1.0
+batch_size: 1024
+num_steps: 4e4
+num_warmup_steps: 400
+num_workers: 0
+log_after: 100
+val_after: 2000
+kl_weight: 1e-6
+equi_weight: 0.
+dropout: 0.
+
+# Encoder: VGAE-style (EncoderGINVAE), with sign_flip_aug + spectral_phi enabled
+# (see configs/encoder/lpe_mlp_gine_guac.yaml)
+encoder_type: vgae
+
+# Decoder: Set Transformer + bilinear (same as the chosen best decoder)
+decoder_type: transformer
+decoder_hidden_dim: 256
+decoder_num_layers: 4
+decoder_num_heads: 4
+
+# Misc
+wandb_project: your-wandb-project
+wandb_entity: your-wandb-entity
+wandb_name: guacamol-ae-vgae-specphi

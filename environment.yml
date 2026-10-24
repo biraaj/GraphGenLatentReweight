@@ -1,0 +1,14 @@
+name: ljrw
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip=24.2
+  - setuptools
+  - wheel
+  - graph-tool=2.45
+  - rdkit=2023.03.2
+  - pygobject=3.50.0

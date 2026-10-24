@@ -1,0 +1,56 @@
+# FM counterpart of tree_ae_vgae_128.yaml. dataset_root points inside
+# dataset_cache/tree/ (matching the AE config) so this resolves to dataset_cache/tree/tree_128.
+defaults:
+  - encoder : lpe_mlp_gine_tree128
+  - denoiser : dit_mediumsmall
+  - dataset : tree_128
+  - _self_
+
+root: null
+dataset_root: dataset_cache/tree
+ae_checkpoint_file: tree_ae_vgae_128_best
+checkpoint: tree_fm_vgae_128_best_baseline
+
+# Training
+seed: 0
+lr_scheduler: 'constant'
+lr: 2e-4
+min_lr: 1e-4
+lr_decay_iters: 2e5
+weight_decay: 1e-12
+gradient_norm: null
+batch_size: 256
+num_steps: 5e5
+num_warmup_steps: 4000
+num_workers: 0
+log_after: 1000
+val_after: 12000
+num_samples: 256
+num_sample_batch: 2
+dropout: 0.
+noise: 0.
+sc_prob: 0.5
+sample: True
+selection_metric: 'acc'
+selection_mode: 'max'
+save_every_eval: False
+
+# FM
+param: 'x_0'
+num_sampling_steps: 100
+time_density: 'log_norm'
+density_params: [0.,1.]
+sampling_time_density: 'log_norm'
+sampling_density_params: [0.,1.]
+
+# Must match AE checkpoint
+encoder_type: vgae
+decoder_type: transformer
+decoder_hidden_dim: 256
+decoder_num_layers: 4
+decoder_num_heads: 4
+
+# Misc
+wandb_project: your-wandb-project
+wandb_entity: your-wandb-entity
+wandb_name: tree128-fm-vgae-baseline

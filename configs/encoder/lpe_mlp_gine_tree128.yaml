@@ -1,0 +1,26 @@
+# EncoderGINVAE config for the tree-128 comparison: pe_dim=128, num_vecs=16,
+# modulation=0.005, ds_dim=24. sign_flip_aug/spectral_phi/modulation_always_on
+# are enabled here (off by default elsewhere) to match the original trained run.
+name: 'lpe'
+num_vecs: 16
+normalized_laplacian: no
+normalize_eigenvecs: True
+phi_model: 'mlp'
+rho_model: 'gin'
+pe_dim: 128
+modulation: 0.005
+sign_flip_aug: true
+spectral_phi: true
+modulation_always_on: true
+ds_dim: 24
+
+phi:
+  num_layers: 2
+  hidden_dim: 256
+  bias: True
+  dropout: 0.
+
+rho:
+  num_layers: 16
+  embed_dim: 256
+  norm: 'batch_norm'

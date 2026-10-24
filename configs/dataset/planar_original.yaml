@@ -1,0 +1,12 @@
+# GenGNN/DiGress original planar dataset (train=128, val=32, test=40, all 64-node planar graphs)
+name: 'planar_original'
+num_nodes: 64
+num_node_features: 0
+num_edge_features: 1
+num_node_types: 0
+num_edge_types: 1
+directed: False
+molecular: False
+large_graph: False
+force_reload: False
+decoder_use_rms_norm: True

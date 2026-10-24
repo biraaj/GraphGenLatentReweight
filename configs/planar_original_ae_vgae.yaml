@@ -1,0 +1,46 @@
+defaults:
+  - encoder: lpe_mlp_gine_planar
+  - dataset: planar_original
+  - _self_
+
+# No verified wandb run of its own; mirrors tree_original's confirmed pe_dim=16
+# (not planar's default pe_dim=128).
+encoder:
+  pe_dim: 16
+
+root: null
+checkpoint: planar_original_ae_vgae_best
+
+# Training  (tuned for small DiGress dataset: 128 train / 32 val / 40 test)
+seed: 0
+lr_scheduler: 'cosine'
+lr: 3e-4
+min_lr: 1e-4
+lr_decay_iters: 2e3
+weight_decay: 1e-4
+gradient_norm: 1.0
+batch_size: 32
+num_steps: 5e3
+num_warmup_steps: 50
+num_workers: 0
+log_after: 100
+val_after: 500
+kl_weight: 1e-6
+equi_weight: 0.
+dropout: 0.
+
+# Encoder: VGAE-style — LPE features projected by a single linear layer
+# (no per-vector phi FFN, no sign-flip augmentation; orbit modulation=0.005
+# inherited from lpe_mlp_gine_planar.yaml's default, matching tree_original)
+encoder_type: vgae
+
+# Decoder: Set Transformer + bilinear
+decoder_type: transformer
+decoder_hidden_dim: 256
+decoder_num_layers: 4
+decoder_num_heads: 4
+
+# Misc
+wandb_project: your-wandb-project
+wandb_entity: your-wandb-entity
+wandb_name: planar-original-ae-vgae
